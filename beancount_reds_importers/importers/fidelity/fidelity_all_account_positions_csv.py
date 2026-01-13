@@ -95,12 +95,12 @@ class Importer(investments.Importer, csvreader.Importer):
                 )
                 match = pattern.search(r[0])
                 if match:
-                    self.date = datetime.datetime.strptime(
+                    self.dl_date = datetime.datetime.strptime(
                         match.group(1), self.date_format
                     )
 
         # add date to each record
-        rdr = rdr.addfields([("date", self.date)])
+        rdr = rdr.addfields([("date", self.dl_date)])
 
         def cusip_to_symbols(s):
             """
