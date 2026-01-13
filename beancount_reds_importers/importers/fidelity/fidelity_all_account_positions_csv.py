@@ -18,15 +18,25 @@ class Importer(investments.Importer, csvreader.Importer):
         self.max_rounding_error = 0.04
         self.file_encoding = "utf-8-sig"
         self.filename_pattern_def = "Portfolio_Positions_.*.csv"
-        self.header_identifier = (
-            "^Account Number,Account Name,Symbol,Description,Quantity.*"
+        # Fidelity is inconsistent in the csv columns and even column labels, the bewlow two settings
+        # should exactly match what is in your csv...if not override via the config
+        self.header_identifier = self.config.get(
+            "header_identifier", "^Account Number,Account Name,Symbol,Description,Quantity.*"
+        )
+        self.column_labels_line = self.config.get(
+            "column_labels_line",
+            "Account Number,Account Name,Symbol,Description,Quantity,Last Price,Last Price Change,Current Value,Today's Gain/Loss Dollar,Today's Gain/Loss Percent,Total Gain/Loss Dollar,Total Gain/Loss Percent,Percent Of Account,Cost Basis Total,Average Cost Basis,Type"
         )
         self.get_ticker_info = self.get_ticker_info_from_id
         self.date_format = "%b-%d-%Y"
         self.funds_db_txt = "funds_by_ticker"
         self.fix_muni_shares = True  # see prepare_raw_file, fidelity reports 100x share values for muni bonds
-        self.column_labels_line = "Account Number,Account Name,Symbol,Description,Quantity,Last Price,Last Price Change,Current Value,Today's Gain/Loss Dollar,Today's Gain/Loss Percent,Total Gain/Loss Dollar,Total Gain/Loss Percent,Percent Of Account,Cost Basis Total,Average Cost Basis,Type"
         # fmt: off
+        self.add_precision = self.config.get(
+            # add some decimal precision to quantity and value fields if none is present
+            "add_precision",
+            False,
+        )
         self.header_map = {
             "Description": "memo",
             "Symbol": "security",
@@ -164,8 +174,9 @@ class Importer(investments.Importer, csvreader.Importer):
         if getattr(self, "fix_muni_shares", False):
             rdr = rdr.convert("Quantity", adjust_muni_share_count, pass_row=True)
 
-        for f in ["Last Price", "Quantity"]:
-            rdr = rdr.convert(f, add_precision)
+        if self.add_precision:
+            for f in ["Last Price", "Quantity"]:
+                rdr = rdr.convert(f, add_precision)
 
         return rdr
 
