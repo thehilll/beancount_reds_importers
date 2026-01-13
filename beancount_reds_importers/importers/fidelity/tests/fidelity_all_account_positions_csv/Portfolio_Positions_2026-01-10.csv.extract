@@ -2,9 +2,11 @@
 2026-01-10 price VGK                                 85.77 USD
 2026-01-10 price VXUS                                77.83 USD
 2026-01-10 price FXAIX                              242.00 USD
+2026-01-10 price CUSIP96255NBE8                    110.036 USD
 
 2026-01-11 balance Assets:Investments:Fidelity:FTCXX               1000.00 FTCXX
 2026-01-11 balance Assets:Investments:Fidelity:VGK                 100.000 VGK
 2026-01-11 balance Assets:Investments:Fidelity:VXUS                200.000 VXUS
 2026-01-11 balance Assets:Investments:Fidelity:FXAIX               300.000 FXAIX
+2026-01-11 balance Assets:Investments:Fidelity:CUSIP96255NBE8      500.00 CUSIP96255NBE8
 2026-01-11 balance Assets:Investments:Fidelity:USD                 300.00 USD
