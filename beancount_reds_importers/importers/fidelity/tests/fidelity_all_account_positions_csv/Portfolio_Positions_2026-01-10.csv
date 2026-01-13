@@ -1,0 +1,18 @@
+Account Number,Account Name,Symbol,Description,Quantity,Last Price,Last Price Change,Current Value,Today's Gain/Loss Dollar,Today's Gain/Loss Percent,Total Gain/Loss Dollar,Total Gain/Loss Percent,Percent Of Account,Cost Basis Total,Average Cost Basis,Type,
+111111111,CMA1,SPAXX**,HELD IN MONEY MARKET,,,,$100.00,,,,,100.00%,,,Cash,
+222222222,CMA2,SPAXX**,HELD IN MONEY MARKET,,,,$200.00,,,,,100.00%,,,Cash,
+333333333,Brokerage1,SPAXX**,HELD IN MONEY MARKET,,,,$300.00,,,,,0.18%,,,Cash,
+333333333,Brokerage1,FTCXX,FIMM TAX EXEMPT PORTFOLIO: CLASS I,1000.00,$1.00,$0.00,$1000.00,--,--,--,--,11.18%,--,--,Cash,
+333333333,Brokerage1,VGK,VANGUARD INTL EQUITY INDEX FDS FTSE EUROPE ETF,100.000,$85.77,$0.59,$8577.00,$59.00,0.69%,$1000.01,12.85%,6.68%,$7600.00,$76.00,Cash,
+333333333,Brokerage1,VXUS,VANGUARD TOTAL INTERNATIONAL STOCK INDEX FUND,200.000,$77.83,$0.55,$15566.00,$110.00,0.71%,$2000.00,14.67%,6.79%,"$13,574.00",$67.87,Cash,
+333333333,Brokerage1,FXAIX,FIDELITY 500 INDEX FUND,300.000,$242.00,$1.57,$72600.00,$471.00,0.65%,$3000.02,14.70%,75.18%,$63.29,$210.98,Cash,
+444444444,Brokerage2,SPAXX**,HELD IN MONEY MARKET,,,,$400.50,,,,,100.00%,,,Cash,
+555555555,CMA3,SPAXX**,HELD IN MONEY MARKET,,,,$500.25,,,,,100.00%,,,Cash,
+
+"The data and information in this spreadsheet is provided to you solely for your use and is not for distribution. The spreadsheet is provided for informational purposes only, and is not intended to provide advice, nor should it be construed as an offer to sell, a solicitation of an offer to buy or a recommendation for any security by Fidelity or any third party. Data and information shown is based on information known to Fidelity as of the date it was exported and is subject to change. It should not be used in place of your account statements or trade confirmations and is not intended for tax reporting purposes. For more information on the data included in this spreadsheet, including any limitations thereof, go to Fidelity.com."
+
+"Brokerage services are provided by Fidelity Brokerage Services LLC (FBS), 900 Salem Street, Smithfield, RI 02917. Custody and other services provided by National Financial Services LLC (NFS). Both are Fidelity Investment companies and members SIPC, NYSE. Neither FBS nor NFS offer crypto as a direct investment nor provide trading or custody services for such assets."
+
+"Insurance products at Fidelity are distributed by Fidelity Insurance Agency, Inc., and, for certain products, by Fidelity Brokerage Services, Member NYSE, SIPC."
+
+Date downloaded Jan-10-2026 at 9:08 a.m ET
