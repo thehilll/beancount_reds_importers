@@ -48,19 +48,14 @@ class Importer(investments.Importer, csvreader.Importer):
         }
         # fmt: on
         self.skip_transaction_types = []
-        self.security_symbol_map = {
+        self.security_symbol_map = self.config.get(
             # if you have securities where you use a custom symbol
             # instead of the one to be found in the CSV, example would
             # be singhle letter symbols which cannot be a bc commodity name
-            "M": "M-M",
-            "V": "V-V",
-            "T": "T-T",
-            "C": "C-C",
-            "F": "F-F",
-            "G": "G-G",
-            "K": "K-K",
-            "A": "A-A",
-        }
+            "security_symbol_map",
+            dict(),
+        )
+
 
     def convert_columns(self, rdr):
         # fixup decimals
