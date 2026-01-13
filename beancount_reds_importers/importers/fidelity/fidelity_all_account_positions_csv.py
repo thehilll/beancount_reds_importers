@@ -30,7 +30,11 @@ class Importer(investments.Importer, csvreader.Importer):
         self.get_ticker_info = self.get_ticker_info_from_id
         self.date_format = "%b-%d-%Y"
         self.funds_db_txt = "funds_by_ticker"
-        self.fix_muni_shares = True  # see prepare_raw_file, fidelity reports 100x share values for muni bonds
+        self.fix_muni_shares = self.config.get(
+            # see prepare_raw_file, fidelity reports 100x share values for muni bonds
+            "fix_muni_shares",
+            False,
+        )
         # fmt: off
         self.add_precision = self.config.get(
             # add some decimal precision to quantity and value fields if none is present
