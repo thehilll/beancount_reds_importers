@@ -74,12 +74,16 @@ class Importer(investments.Importer, csvreader.Importer):
 
         return rdr
 
+    def date(self, filepath):
+        self.read_file(filepath)
+        return self.dl_date.date()
+
     def file_date(self, file):
         self.read_file(file)
-        return self.date.date()
+        return self.dl_date.date()
 
     def get_max_transaction_date(self):
-        return self.date.date()
+        return self.dl_date.date()
 
     def prepare_raw_file(self, rdr):
         for r in rdr.data():
