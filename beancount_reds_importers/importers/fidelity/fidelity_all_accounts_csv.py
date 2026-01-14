@@ -283,6 +283,10 @@ class Importer(csvreader.Importer, investments.Importer):
             return value
 
         def compute_inferred_price(row):
+            if row["Quantity"] is None or row["Quantity"].strip() == "":
+                # can''t do anything if quantity is empty
+                return ""
+
             qty = float(row["Quantity"])
             amt = float(row["Amount"])
             acc = float(row["Accrued Interest"] if row["Accrued Interest"] else 0)
