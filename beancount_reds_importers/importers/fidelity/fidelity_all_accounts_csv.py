@@ -201,6 +201,11 @@ class Importer(csvreader.Importer, investments.Importer):
             their cusip, try to convert these to symbol if they
             are present in fund_data
             """
+            if s.strip() == "":
+                # do not map an empty symbol using funds_by_id
+                return s
+
+            # look up the sybmol in a dict mapping CUSIP to the fund_info tuple
             return self.funds_by_id.get(s, (s,))[0]
 
         def map_symbols(s):
