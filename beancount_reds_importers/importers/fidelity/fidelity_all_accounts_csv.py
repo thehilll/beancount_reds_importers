@@ -149,6 +149,7 @@ class Importer(csvreader.Importer, investments.Importer):
             "EXCHANGE IN": "buymf",
             "CHANGE ON": "capgainsd_lt",
             "WITHDRAWALS": "sellmf",
+            "PRINCIPAL PAYMENT": "sellstock",
         }
         self.transaction_type_map = {**self.transaction_type_map, **self.config.get("transaction_type_map", dict())}
         # fmt: on
