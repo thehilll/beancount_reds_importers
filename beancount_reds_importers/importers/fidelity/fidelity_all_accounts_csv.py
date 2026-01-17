@@ -149,7 +149,7 @@ class Importer(csvreader.Importer, investments.Importer):
             "EXCHANGE IN": "buymf",
             "CHANGE ON": "capgainsd_lt",
             "WITHDRAWALS": "sellmf",
-            "PRINCIPAL PAYMENT": "sellstock",
+            "PRINCIPAL PAYMENT": "income",  # this seems to more accurately be a return of capital, but no price or quantity is provided
         }
         self.transaction_type_map = {**self.transaction_type_map, **self.config.get("transaction_type_map", dict())}
         # fmt: on
