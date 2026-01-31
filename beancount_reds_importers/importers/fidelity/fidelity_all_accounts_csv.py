@@ -120,6 +120,7 @@ class Importer(csvreader.Importer, investments.Importer):
             "TRANSFERRED TO": "xfer",
             "MUNI EXEMPT": "income",
             "INTEREST EARNED": "income",
+            "INTEREST AS": "income",
             "FEE CHARGED": "fee",
             "ADVISOR FEE": "fee",
             "FOREIGN TAX": "fee",
