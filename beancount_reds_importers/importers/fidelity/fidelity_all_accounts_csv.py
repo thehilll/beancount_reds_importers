@@ -125,6 +125,7 @@ class Importer(csvreader.Importer, investments.Importer):
             "ADVISOR FEE": "fee",
             "FOREIGN TAX": "fee",
             "ADJ FOREIGN": "fee",
+            "ADJUST FEE": "fee",
             "BUY CANCEL": "fee",  # longer text here is BUY CANCEL TAX PAID as of May-05-2025...
             "DIVIDEND ADJUSTMENT": "fee",  # longer text here is FOREIGN TAX PAID as of May-05-2025...
             "BILL PAYMENT": "payment",
