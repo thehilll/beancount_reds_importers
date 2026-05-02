@@ -180,10 +180,11 @@ class Importer(csvreader.Importer, investments.Importer):
     def skip_transaction(self, ot):
         if ot.account_number != self.config["account_number"]:
             return True
-        return ot.type in ["MERGER MER", "ADJUST FEE", "DISTRIBUTION", "JOURNALED JNL"]
+        return ot.type in ["MERGER MER", "ADJUST FEE", "DISTRIBUTION", "JOURNALED JNL", "JOURNALED AS"]
         # this sort of transaction must be handled manually
         # ADJUST FEE sounds like a fee, but has been used for a 1:1 reorg
         # DISTRIBUTION is for splits
+        # I think the JOURNALED types are only temporary
 
     def prepare_table(self, rdr):
         if "" in rdr.fieldnames():
