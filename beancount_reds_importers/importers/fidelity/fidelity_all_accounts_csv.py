@@ -86,6 +86,19 @@ class Importer(csvreader.Importer, investments.Importer):
             "swap_quantity_and_price_values",
             False,
         )
+        self.core_acct_symbols = self.config.get(
+            # In these csv Fidelity generally does not show transactions in the core account other
+            # than reinvestments of monthly dividends.  This causes issues if the core account
+            # is tracked as cash, e.g.
+            #   Assets:Banking:Fidelity:CMAACCT:Cash
+            # The monthly dividends will be paid from the security's income account to this cash account
+            # then reinvested from cash to the security asset.  However, the security balance is not reported,
+            # the balance is shown as cash.  The reinvestment causes a balance error.  Fix by listing
+            # core account securities for the account.  Any purchases of this security will be skipped, resulting
+            # in the monthly divident generating a deposit to cash but no purchase of the core account security
+            "core_acct_symbols",
+            [],
+        )
         # fmt: off
         self.header_map = {
             "Account Number": "account_number",
@@ -180,12 +193,18 @@ class Importer(csvreader.Importer, investments.Importer):
     def skip_transaction(self, ot):
         if ot.account_number != self.config["account_number"]:
             return True
-        return ot.type in ["MERGER MER", "ADJUST FEE", "DISTRIBUTION", "JOURNALED JNL", "JOURNALED AS", "RETURN OF"]
-        # this sort of transaction must be handled manually
-        # ADJUST FEE sounds like a fee, but has been used for a 1:1 reorg
-        # DISTRIBUTION is for splits
-        # I think the JOURNALED types are only temporary
-        # RETURN OF is return of capital...needs to be handled as an exchange of position at a lower basis
+        if ot.type in ["MERGER MER", "ADJUST FEE", "DISTRIBUTION", "JOURNALED JNL", "JOURNALED AS", "RETURN OF"]:
+            # this sort of transaction must be handled manually
+            # ADJUST FEE sounds like a fee, but has been used for a 1:1 reorg
+            # DISTRIBUTION is for splits
+            # I think the JOURNALED types are only temporary
+            # RETURN OF is return of capital...needs to be handled as an exchange of position at a lower basis
+            return True
+
+        if ot.type in ["buymf"] and ot.security in self.core_acct_symbols:
+            return True
+
+        return False
 
     def prepare_table(self, rdr):
         if "" in rdr.fieldnames():
