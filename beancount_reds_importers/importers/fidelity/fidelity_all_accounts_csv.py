@@ -143,6 +143,7 @@ class Importer(csvreader.Importer, investments.Importer):
             "DIVIDEND ADJUSTMENT": "fee",  # longer text here is FOREIGN TAX PAID as of May-05-2025...
             "BILL PAYMENT": "payment",
             "DEBIT CARD": "payment",
+            "DEBIT CRD": "payment",
             "CHECK PAID": "payment",
             "DIRECT DEBIT": "payment",
             "ELECTRONIC FUNDS": "payment",
