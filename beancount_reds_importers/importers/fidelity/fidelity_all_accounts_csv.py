@@ -28,7 +28,11 @@ class Importer(csvreader.Importer, investments.Importer):
             "Run Date,Account,Account Number,Action,Symbol,Description,Type,Exchange Quantity,Exchange Currency,Currency,Price,Quantity,Exchange Rate,Commission,Fees,Accrued Interest,Amount,Settlement Date",
         )
         self.get_ticker_info = self.get_ticker_info_from_id
-        self.date_format = "%m/%d/%Y"
+        self.date_format =  self.config.get(
+            # note on 2026-07-04 changed from "%m/%d/%Y", allow user config in case they change again
+            "fidelity_dt_fmt",
+            "%m-%d-%Y",
+        )
         self.funds_db_txt = "funds_by_ticker"
         self.currency = self.config.get("currency", None)
         self.use_inferred_price = self.config.get(
@@ -336,6 +340,8 @@ class Importer(csvreader.Importer, investments.Importer):
             # can be inferred...these seem to be things like 1:1 reorgs or stock splits
             # in either case these will need to be handled manually (and they cannot be
             # properly created w/o the inferred price either)
+            # NOTE: have seen a case where fidelity CSV price is just wrong (slightly)
+            # CSV price was 72.44, inferred price was 72.4452 which failed test below...just fixed manually
             if row["Price"] and not math.isclose(round(price, 2), float(row["Price"]), rel_tol=1e-9, abs_tol=1e-9):
                 return row["Price"]
 
