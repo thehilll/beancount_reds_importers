@@ -146,6 +146,7 @@ class Importer(csvreader.Importer, investments.Importer):
             "BUY CANCEL": "fee",  # longer text here is BUY CANCEL TAX PAID as of May-05-2025...
             "DIVIDEND ADJUSTMENT": "fee",  # longer text here is FOREIGN TAX PAID as of May-05-2025...
             "BILL PAYMENT": "payment",
+            "ADJUST BILL": "payment",
             "DEBIT CARD": "payment",
             "DEBIT CRD": "payment",
             "CHECK PAID": "payment",
