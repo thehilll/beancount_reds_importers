@@ -21,11 +21,11 @@ class Importer(investments.Importer, csvreader.Importer):
         # Fidelity is inconsistent in the csv columns and even column labels, the bewlow two settings
         # should exactly match what is in your csv...if not override via the config
         self.header_identifier = self.config.get(
-            "header_identifier", "^Account Number,Account Name,Symbol,Description,Quantity.*"
+            "header_identifier", "^Account number,Account name,Symbol,Description,Quantity.*"
         )
         self.column_labels_line = self.config.get(
             "column_labels_line",
-            "Account Number,Account Name,Symbol,Description,Quantity,Last Price,Last Price Change,Current Value,Today's Gain/Loss Dollar,Today's Gain/Loss Percent,Total Gain/Loss Dollar,Total Gain/Loss Percent,Percent Of Account,Cost Basis Total,Average Cost Basis,Type"
+            "Account number,Account name,Symbol,Description,Quantity,Last price,Last price change,Current value,Today's gain/loss dollar,Today's gain/loss percent,Total gain/loss dollar,Total gain/loss percent,Percent of account,Cost basis total,Average cost basis,Type"
         )
         self.get_ticker_info = self.get_ticker_info_from_id
         self.date_format = "%b-%d-%Y"
@@ -46,9 +46,9 @@ class Importer(investments.Importer, csvreader.Importer):
             "Symbol": "security",
             "date": "date",
             "Quantity": "units",
-            "Last Price": "unit_price",
-            "Account Number": "account_number",
-            "Current Value": "balance",
+            "Last price": "unit_price",
+            "Account number": "account_number",
+            "Current value": "balance",
         }
         # fmt: on
         self.skip_transaction_types = []
@@ -131,10 +131,10 @@ class Importer(investments.Importer, csvreader.Importer):
             try to identify this and adjust by dividing by 100
             """
             # if quantity is None or row["Price"] is None or row["Amount"] is None:
-            if None in [quantity, row["Last Price"], row["Current Value"]] or "" in [
+            if None in [quantity, row["Last price"], row["Current value"]] or "" in [
                 quantity,
-                row["Last Price"],
-                row["Current Value"],
+                row["Last price"],
+                row["Current value"],
             ]:
                 # if quantity or price is not set there is nothing to fix here
                 return quantity
@@ -147,8 +147,8 @@ class Importer(investments.Importer, csvreader.Importer):
                     rel_tol=1e-09,
                     abs_tol=1e-09,
                 ):
-                    numeric_value = re.sub(r"[^0-9\.]", "", row["Current Value"])
-                    numeric_price = re.sub(r"[^0-9\.]", "", row["Last Price"])
+                    numeric_value = re.sub(r"[^0-9\.]", "", row["Current value"])
+                    numeric_price = re.sub(r"[^0-9\.]", "", row["Last price"])
                     inferred_price = round(
                         abs(float(numeric_value)) / abs(float(quantity)), 4
                     )
@@ -178,7 +178,7 @@ class Importer(investments.Importer, csvreader.Importer):
             rdr = rdr.convert("Quantity", adjust_muni_share_count, pass_row=True)
 
         if self.add_precision:
-            for f in ["Last Price", "Quantity"]:
+            for f in ["Last price", "Quantity"]:
                 rdr = rdr.convert(f, add_precision)
 
         return rdr
