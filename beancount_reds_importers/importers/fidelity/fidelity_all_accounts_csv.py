@@ -134,6 +134,7 @@ class Importer(csvreader.Importer, investments.Importer):
             "YOU SOLD": "sellstock",
             "REDEMPTION PAYOUT": "sellother",
             "DIRECT DEPOSIT": "dep",
+            "DIRECT DDP": "dep",
             "TRANSFERRED TO": "xfer",
             "MUNI EXEMPT": "income",
             "INTEREST EARNED": "income",
